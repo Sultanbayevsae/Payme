@@ -24,4 +24,6 @@ public class Notification {
 
     @ManyToOne
     private User user;
+
+    private boolean read;
 }

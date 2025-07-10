@@ -25,4 +25,6 @@ public class Service {
     @NotBlank
     private String provider;
 
+    private boolean active;
+
 }

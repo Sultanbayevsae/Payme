@@ -3,6 +3,7 @@ package org.example.payme.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Entity
@@ -11,7 +12,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,12 @@ public class Card {
 
     @Pattern(regexp = "\\d{2}/\\d{2}", message = "Expiry date must be in MM/YY")
     private String expiryDate;
+
+    @NotBlank
+    @Size(min = 4, max = 6)
+    private String password;
+
+    private Double balance;
 
     @NotBlank
     private String cardHolder;

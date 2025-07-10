@@ -4,9 +4,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.example.payme.entity.Transaction;
 import org.example.payme.util.HibernateUtil;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class TransactionDao {
 
     public void save(Transaction txObj) {

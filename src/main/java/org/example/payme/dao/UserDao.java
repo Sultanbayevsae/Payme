@@ -5,9 +5,11 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
 import org.example.payme.entity.User;
 import org.example.payme.util.HibernateUtil;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class UserDao {
     public void save(User user) {
         EntityManager em = HibernateUtil.getEntityManagerFactory().createEntityManager();
@@ -87,6 +89,4 @@ public class UserDao {
             em.close();
         }
     }
-
-
 }

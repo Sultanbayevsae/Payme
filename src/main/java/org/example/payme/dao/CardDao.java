@@ -2,10 +2,8 @@ package org.example.payme.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.NoResultException;
 import org.example.payme.entity.Card;
-import org.example.payme.entity.User;
 import org.example.payme.util.HibernateUtil;
 
 import java.util.List;
@@ -63,6 +61,45 @@ public class CardDao {
             em.close();
         }
     }
+
+    public List<Card> findByUserId(Long userId) {
+        EntityManager em = HibernateUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            return em.createQuery("select c from Card c where c.user.id = :userId",Card.class)
+                    .setParameter("userId",userId)
+                    .getResultList();
+        }finally {
+            em.close();
+        }
+    }
+
+    public Card findByNumber(String cardNumber) {
+        EntityManager em = HibernateUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            return em.createQuery(
+                            "SELECT c FROM Card c WHERE c.cardNumber = :cardNumber", Card.class)
+                    .setParameter("cardNumber", cardNumber)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    public boolean existsByCardNumber(String cardNumber) {
+        EntityManager em = HibernateUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            Long count = em.createQuery(
+                            "SELECT COUNT(c) FROM Card c WHERE c.cardNumber = :cardNumber", Long.class)
+                    .setParameter("cardNumber", cardNumber)
+                    .getSingleResult();
+            return count > 0;
+        } finally {
+            em.close();
+        }
+    }
+
 
 
 }

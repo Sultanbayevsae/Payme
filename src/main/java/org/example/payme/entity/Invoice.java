@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -23,8 +24,10 @@ public class Invoice {
     @Positive
     private Double amount;
 
+    private String status;
+
     @NotNull
-    private LocalDate dueDate;
+    private LocalDateTime createdAt;
 
     @ManyToOne
     private User user;

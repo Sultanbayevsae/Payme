@@ -23,6 +23,6 @@ public class AuthToken {
 
     private LocalDateTime expiry;
 
-    @OneToOne
+    @ManyToOne
     private User user;
 }
