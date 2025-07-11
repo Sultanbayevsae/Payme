@@ -64,6 +64,8 @@ public class TransactionDao {
         }
     }
 
+    // bu delete kere narsa
+
     public List<Transaction> findByUserId(Long userId) {
         EntityManager em = HibernateUtil.getEntityManagerFactory().createEntityManager();
         try {
